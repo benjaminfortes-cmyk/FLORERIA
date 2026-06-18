@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Florería Carola Salinas Rojas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#a07d28;
+    --gold-deep:#876618;
+    --gold-soft:#c9a44c;
+    --cream:#f7f1dc;
+    --cream-deep:#efe6c6;
+    --ink:#3a3220;
+    --paper:#fffdf6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Cormorant Garamond',serif;
+    color:var(--ink);
+    background:var(--cream);
+    font-size:18px;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.brand{font-family:'Marcellus',serif;font-weight:400;letter-spacing:.04em}
+
+  /* ---------- TOP BAR ---------- */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:linear-gradient(180deg,var(--gold) 0%,var(--gold-deep) 100%);
+    box-shadow:0 4px 24px rgba(80,60,10,.25);
+    border-bottom:1px solid rgba(255,255,255,.15);
+  }
+  .bar{
+    max-width:1200px;margin:0 auto;padding:.6rem 1.4rem;
+    display:flex;align-items:center;gap:1rem;
+  }
+  .bar .logo{
+    height:58px;width:58px;border-radius:50%;
+    background:var(--cream);padding:3px;object-fit:cover;
+    box-shadow:0 2px 10px rgba(0,0,0,.2);
+  }
+  .bar .titles{flex:1;line-height:1.1;color:var(--cream)}
+  .bar .titles .name{font-family:'Marcellus',serif;font-size:1.15rem;letter-spacing:.12em;text-transform:uppercase}
+  .bar .titles .sub{font-size:.95rem;letter-spacing:.18em;opacity:.85;text-transform:uppercase}
+  .bar nav{display:flex;gap:1.4rem;align-items:center}
+  .bar nav a{color:var(--cream);text-decoration:none;font-size:1.05rem;letter-spacing:.05em;opacity:.9;transition:opacity .2s}
+  .bar nav a:hover{opacity:1}
+  .cart-btn{
+    background:var(--cream);color:var(--gold-deep);border:none;cursor:pointer;
+    font-family:'Marcellus',serif;font-size:.95rem;letter-spacing:.08em;
+    padding:.5rem .9rem;border-radius:999px;display:flex;align-items:center;gap:.4rem;
+    box-shadow:0 2px 8px rgba(0,0,0,.18);transition:transform .15s;
+  }
+  .cart-btn:hover{transform:translateY(-1px)}
+  .cart-count{background:var(--gold);color:#fff;border-radius:50%;min-width:22px;height:22px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;font-family:'Cormorant Garamond';font-weight:600}
+
+  @media(max-width:680px){
+    .bar nav a{display:none}
+    .bar .titles .name{font-size:.95rem}
+  }
+
+  /* ---------- HERO with blooming flower ---------- */
+  .hero{
+    min-height:135vh;position:relative;
+    display:flex;flex-direction:column;align-items:center;
+    text-align:center;padding:5rem 1.2rem 0;
+    background:
+      radial-gradient(circle at 50% 18%,rgba(201,164,76,.18),transparent 55%),
+      var(--cream);
+  }
+  .hero .kicker{letter-spacing:.4em;text-transform:uppercase;font-size:.85rem;color:var(--gold-deep);margin-bottom:1rem}
+  .hero h1{font-size:clamp(2.4rem,6vw,4.6rem);color:var(--ink);line-height:1.05;max-width:14ch}
+  .hero p.lead{font-size:1.35rem;max-width:34ch;margin:1.2rem auto 0;font-style:italic;color:#6a5c38}
+
+  /* flower that blooms on scroll */
+  .flower-wrap{
+    position:sticky;top:18vh;margin-top:3rem;width:340px;height:340px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .flower{width:100%;height:100%;transform:rotate(calc(var(--bloom)*180deg));transition:transform .1s linear}
+  .petal{
+    transform-box:fill-box;transform-origin:center bottom;
+    transform:scale(calc(.15 + var(--bloom)*.85)) rotate(var(--rot));
+    opacity:calc(.2 + var(--bloom)*.8);
+    transition:transform .1s linear,opacity .1s linear;
+  }
+  .scroll-hint{margin-top:1.2rem;font-size:.9rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-deep);opacity:.7;animation:fade 2s ease-in-out infinite}
+  @keyframes fade{0%,100%{opacity:.3}50%{opacity:.8}}
+
+  /* ---------- SECTION HEADINGS ---------- */
+  .section{max-width:1200px;margin:0 auto;padding:5rem 1.4rem}
+  .section-head{text-align:center;margin-bottom:3rem}
+  .section-head .deco{color:var(--gold-soft);letter-spacing:.5em;font-size:1rem}
+  .section-head h2{font-size:clamp(2rem,4.5vw,3rem);color:var(--ink);margin:.3rem 0}
+  .section-head p{color:#6a5c38;max-width:46ch;margin:0 auto;font-style:italic}
+
+  /* ---------- PRODUCT GRID ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:2rem}
+  .card{
+    background:var(--paper);border:1px solid var(--cream-deep);border-radius:6px;
+    overflow:hidden;display:flex;flex-direction:column;
+    box-shadow:0 10px 30px rgba(120,95,25,.08);transition:transform .25s,box-shadow .25s;
+  }
+  .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(120,95,25,.18)}
+  .card .ph{aspect-ratio:3/4;overflow:hidden;background:var(--cream-deep)}
+  .card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .card:hover .ph img{transform:scale(1.06)}
+  .card .body{padding:1.1rem 1.2rem 1.4rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+  .card .body h3{font-size:1.4rem;color:var(--ink)}
+  .card .body .price{color:var(--gold-deep);font-size:1.3rem;font-weight:600;letter-spacing:.02em}
+  .card .add{
+    margin-top:auto;background:var(--gold);color:#fff;border:none;cursor:pointer;
+    font-family:'Marcellus',serif;letter-spacing:.06em;font-size:.95rem;
+    padding:.7rem;border-radius:4px;transition:background .2s;
+  }
+  .card .add:hover{background:var(--gold-deep)}
+
+  /* ---------- INFO STRIP ---------- */
+  .info{background:var(--cream-deep);}
+  .info .section{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem}
+  .info .box{text-align:center}
+  .info .box .ic{font-size:1.8rem;color:var(--gold)}
+  .info .box h3{font-size:1.3rem;margin:.4rem 0;color:var(--ink)}
+  .info .box p{font-size:1rem;color:#6a5c38}
+
+  /* ---------- ARMA TU RAMO ---------- */
+  .builder{background:
+      radial-gradient(circle at 80% 0%,rgba(201,164,76,.16),transparent 50%),
+      var(--cream)}
+  .builder-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start}
+  .builder .group{margin-bottom:1.8rem}
+  .builder .group > label.glabel{display:block;font-family:'Marcellus',serif;font-size:1.15rem;color:var(--gold-deep);margin-bottom:.7rem;letter-spacing:.04em}
+  .chips{display:flex;flex-wrap:wrap;gap:.6rem}
+  .chip{position:relative;cursor:pointer}
+  .chip input{position:absolute;opacity:0;pointer-events:none}
+  .chip span{display:inline-block;padding:.5rem 1rem;border:1px solid var(--gold-soft);border-radius:999px;
+    background:var(--paper);color:var(--ink);font-size:1.02rem;transition:all .2s}
+  .chip input:checked + span{background:var(--gold);color:#fff;border-color:var(--gold);box-shadow:0 4px 12px rgba(160,125,40,.3)}
+  .builder .summary{
+    background:var(--paper);border:1px solid var(--cream-deep);border-radius:8px;padding:1.8rem;
+    box-shadow:0 10px 30px rgba(120,95,25,.1);position:sticky;top:100px}
+  .builder .summary h3{font-size:1.5rem;color:var(--ink);margin-bottom:.3rem}
+  .builder .summary .sub{font-style:italic;color:#6a5c38;margin-bottom:1.2rem}
+  .builder .summary .line{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px dashed var(--cream-deep);font-size:1.05rem}
+  .builder .summary .line span:first-child{color:#7a6c44}
+  .builder .summary .big{font-family:'Marcellus',serif;font-size:1.5rem;color:var(--gold-deep);margin:1rem 0;display:flex;justify-content:space-between}
+  .builder textarea{width:100%;border:1px solid var(--gold-soft);border-radius:6px;padding:.7rem;font-family:'Cormorant Garamond';font-size:1rem;resize:vertical;min-height:70px;background:var(--paper);color:var(--ink)}
+  .builder .add-custom{width:100%;background:var(--gold);color:#fff;border:none;cursor:pointer;
+    font-family:'Marcellus',serif;letter-spacing:.06em;font-size:1rem;padding:.85rem;border-radius:6px;margin-top:1rem;transition:background .2s}
+  .builder .add-custom:hover{background:var(--gold-deep)}
+  @media(max-width:760px){.builder-grid{grid-template-columns:1fr}.builder .summary{position:static}}
+
+  .ci .ci-info .desc{font-size:.85rem;color:#8a7a4c;font-style:italic;line-height:1.3}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:linear-gradient(180deg,var(--gold-deep),#6b5012);color:var(--cream);text-align:center;padding:3.5rem 1.4rem}
+  footer img{height:90px;width:90px;border-radius:50%;background:var(--cream);padding:5px;margin-bottom:1rem}
+  footer .name{font-family:'Marcellus',serif;letter-spacing:.18em;text-transform:uppercase;font-size:1.1rem}
+  footer .wa{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;background:#25D366;color:#fff;
+    text-decoration:none;padding:.7rem 1.4rem;border-radius:999px;font-family:'Marcellus',serif;letter-spacing:.05em}
+  footer small{display:block;margin-top:2rem;opacity:.7;letter-spacing:.05em}
+
+  /* ---------- CART DRAWER ---------- */
+  .overlay{position:fixed;inset:0;background:rgba(40,30,5,.45);opacity:0;pointer-events:none;transition:opacity .3s;z-index:200}
+  .overlay.open{opacity:1;pointer-events:auto}
+  .drawer{
+    position:fixed;top:0;right:0;height:100%;width:min(400px,90vw);background:var(--paper);z-index:201;
+    transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
+    display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,.25);
+  }
+  .drawer.open{transform:translateX(0)}
+  .drawer .dh{background:var(--gold);color:var(--cream);padding:1.2rem 1.4rem;display:flex;justify-content:space-between;align-items:center}
+  .drawer .dh h3{font-size:1.3rem;letter-spacing:.08em}
+  .drawer .dh button{background:none;border:none;color:var(--cream);font-size:1.6rem;cursor:pointer;line-height:1}
+  .drawer .items{flex:1;overflow-y:auto;padding:1rem 1.4rem}
+  .drawer .empty{text-align:center;color:#9a8a5c;font-style:italic;margin-top:3rem}
+  .ci{display:flex;gap:.9rem;align-items:center;padding:.9rem 0;border-bottom:1px solid var(--cream-deep)}
+  .ci img{width:56px;height:70px;object-fit:cover;border-radius:4px}
+  .ci .ci-info{flex:1}
+  .ci .ci-info h4{font-family:'Marcellus',serif;font-weight:400;font-size:1.05rem}
+  .ci .ci-info .p{color:var(--gold-deep);font-weight:600}
+  .ci .qty{display:flex;align-items:center;gap:.5rem}
+  .ci .qty button{width:26px;height:26px;border:1px solid var(--gold);background:var(--cream);color:var(--gold-deep);border-radius:50%;cursor:pointer;font-size:1rem}
+  .drawer .foot{padding:1.2rem 1.4rem;border-top:1px solid var(--cream-deep)}
+  .drawer .total{display:flex;justify-content:space-between;font-size:1.3rem;margin-bottom:1rem;font-family:'Marcellus',serif}
+  .checkout{display:block;width:100%;text-align:center;background:#25D366;color:#fff;text-decoration:none;
+    padding:.9rem;border-radius:6px;font-family:'Marcellus',serif;letter-spacing:.06em;border:none;cursor:pointer;font-size:1rem}
+  .checkout.disabled{background:#cdbf99;pointer-events:none}
+</style>
+</head>
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<header>
+  <div class="bar">
+    <img class="logo" src="ChatGPT%20Image%2018%20jun%202026,%2016_30_35.png" alt="Logo Florería Carola Salinas Rojas">
+    <div class="titles">
+      <div class="name">Carola Salinas Rojas</div>
+      <div class="sub">Florería</div>
+    </div>
+    <nav>
+      <a href="#ramos">Ramos</a>
+      <a href="#info">Despacho</a>
+    </nav>
+    <button class="cart-btn" onclick="openCart()">
+      🛒 Carrito <span class="cart-count" id="count">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== HERO con flor que florece al scrollear ===== -->
+<section class="hero">
+  <div class="kicker">Arreglos florales artesanales</div>
+  <h1>Flores que dicen lo que las palabras callan</h1>
+  <p class="lead">Cada ramo creado a mano, pensado para emocionar.</p>
+
+  <div class="flower-wrap">
+    <svg class="flower" id="flower" viewBox="-100 -100 200 200">
+      <!-- petalos -->
+      <g id="petals"></g>
+      <!-- centro -->
+      <circle cx="0" cy="0" r="18" fill="#876618"/>
+      <circle cx="0" cy="0" r="11" fill="#c9a44c"/>
+      <circle cx="0" cy="0" r="4" fill="#876618"/>
+    </svg>
+  </div>
+  <div class="scroll-hint">Desliza para ver florecer ↓</div>
+</section>
+
+<!-- ===== RAMOS ===== -->
+<section class="section" id="ramos">
+  <div class="section-head">
+    <div class="deco">✿ ✿ ✿</div>
+    <h2>Nuestros Ramos</h2>
+    <p>Imágenes referenciales. Podemos adaptar colores y flores según disponibilidad de temporada.</p>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<!-- ===== ARMA TU RAMO ===== -->
+<div class="builder" id="arma">
+  <div class="section">
+    <div class="section-head">
+      <div class="deco">✿ ✿ ✿</div>
+      <h2>Arma tu propio ramo</h2>
+      <p>¿Buscas algo único? Las fotos son referenciales: aquí eliges el tamaño, las flores y los colores, y lo preparamos especialmente para ti.</p>
+    </div>
+
+    <div class="builder-grid">
+      <!-- opciones -->
+      <div>
+        <div class="group">
+          <label class="glabel">1 · Elige el tamaño</label>
+          <div class="chips" id="sizes">
+            <label class="chip"><input type="radio" name="size" value="Pequeño|15990" checked onchange="updateBuilder()"><span>Pequeño · $15.990</span></label>
+            <label class="chip"><input type="radio" name="size" value="Mediano|22990" onchange="updateBuilder()"><span>Mediano · $22.990</span></label>
+            <label class="chip"><input type="radio" name="size" value="Grande|32990" onchange="updateBuilder()"><span>Grande · $32.990</span></label>
+          </div>
+        </div>
+
+        <div class="group">
+          <label class="glabel">2 · Elige tus flores favoritas</label>
+          <div class="chips" id="flowers">
+            <label class="chip"><input type="checkbox" value="Girasoles" onchange="updateBuilder()"><span>🌻 Girasoles</span></label>
+            <label class="chip"><input type="checkbox" value="Rosas" onchange="updateBuilder()"><span>🌹 Rosas</span></label>
+            <label class="chip"><input type="checkbox" value="Lilium" onchange="updateBuilder()"><span>🌸 Lilium</span></label>
+            <label class="chip"><input type="checkbox" value="Gerberas" onchange="updateBuilder()"><span>🌼 Gerberas</span></label>
+            <label class="chip"><input type="checkbox" value="Hortensias" onchange="updateBuilder()"><span>💠 Hortensias</span></label>
+            <label class="chip"><input type="checkbox" value="Margaritas" onchange="updateBuilder()"><span>🌷 Margaritas</span></label>
+            <label class="chip"><input type="checkbox" value="Sorpresa del día" onchange="updateBuilder()"><span>✨ Sorpresa del día</span></label>
+          </div>
+        </div>
+
+        <div class="group">
+          <label class="glabel">3 · Paleta de colores</label>
+          <div class="chips" id="palette">
+            <label class="chip"><input type="radio" name="palette" value="Tonos cálidos" checked onchange="updateBuilder()"><span>Cálidos</span></label>
+            <label class="chip"><input type="radio" name="palette" value="Pastel suave" onchange="updateBuilder()"><span>Pastel</span></label>
+            <label class="chip"><input type="radio" name="palette" value="Vibrante mix" onchange="updateBuilder()"><span>Vibrante</span></label>
+            <label class="chip"><input type="radio" name="palette" value="Romántico rojo" onchange="updateBuilder()"><span>Romántico</span></label>
+            <label class="chip"><input type="radio" name="palette" value="Eligen por mí" onchange="updateBuilder()"><span>Elijan por mí</span></label>
+          </div>
+        </div>
+
+        <div class="group">
+          <label class="glabel">4 · Dedicatoria o detalle (opcional)</label>
+          <textarea id="note" placeholder="Ej: para mi mamá, con una tarjeta que diga..." oninput="updateBuilder()"></textarea>
+        </div>
+      </div>
+
+      <!-- resumen -->
+      <div class="summary">
+        <h3>Tu ramo a medida</h3>
+        <div class="sub">Lo preparamos con flores frescas del día 🌷</div>
+        <div class="line"><span>Tamaño</span><span id="sumSize">Pequeño</span></div>
+        <div class="line"><span>Flores</span><span id="sumFlowers">A elección</span></div>
+        <div class="line"><span>Colores</span><span id="sumPalette">Tonos cálidos</span></div>
+        <div class="big"><span>Total</span><span id="sumPrice">$15.990</span></div>
+        <button class="add-custom" onclick="addCustom()">Agregar ramo al carrito 🌸</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== INFO / DESPACHO ===== -->
+<div class="info" id="info">
+  <div class="section">
+    <div class="box">
+      <div class="ic">🚚</div>
+      <h3>Despacho</h3>
+      <p>Coordinamos la entrega de tu arreglo de forma cuidadosa para que llegue impecable.</p>
+    </div>
+    <div class="box">
+      <div class="ic">🌷</div>
+      <h3>Hecho a mano</h3>
+      <p>Cada ramo es preparado el mismo día con flores frescas y mucho cariño.</p>
+    </div>
+    <div class="box">
+      <div class="ic">💬</div>
+      <h3>Pedidos por WhatsApp</h3>
+      <p>Arma tu carrito y finaliza tu compra directo con nosotros por WhatsApp.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <img src="ChatGPT%20Image%2018%20jun%202026,%2016_30_35.png" alt="Logo">
+  <div class="name">Florería Carola Salinas Rojas</div>
+  <a class="wa" href="https://wa.me/56954054379" target="_blank">💬 +56 9 5405 4379</a>
+  <small>© 2026 Florería Carola Salinas Rojas — Imágenes referenciales</small>
+</footer>
+
+<!-- ===== CARRITO ===== -->
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<aside class="drawer" id="drawer">
+  <div class="dh">
+    <h3>Tu Carrito</h3>
+    <button onclick="closeCart()">×</button>
+  </div>
+  <div class="items" id="items">
+    <p class="empty">Tu carrito está vacío 🌸</p>
+  </div>
+  <div class="foot">
+    <div class="total"><span>Total</span><span id="total">$0</span></div>
+    <button class="checkout disabled" id="checkout" onclick="checkout()">Finalizar por WhatsApp</button>
+  </div>
+</aside>
+
+<script>
+  /* ---------- Flor que florece al scrollear ---------- */
+  const petalsG = document.getElementById('petals');
+  const N = 10;
+  for(let i=0;i<N;i++){
+    const ns="http://www.w3.org/2000/svg";
+    const p=document.createElementNS(ns,'path');
+    // petalo en forma de lagrima apuntando hacia arriba desde el centro
+    p.setAttribute('d','M0,0 C20,-30 20,-70 0,-90 C-20,-70 -20,-30 0,0 Z');
+    p.setAttribute('class','petal');
+    p.setAttribute('fill', i%2 ? '#c9a44c' : '#a07d28');
+    p.style.setProperty('--rot', (i*(360/N))+'deg');
+    petalsG.appendChild(p);
+  }
+  const hero=document.querySelector('.hero');
+  const flowerEls=document.querySelectorAll('.petal');
+  const flower=document.getElementById('flower');
+  function updateBloom(){
+    const rect=hero.getBoundingClientRect();
+    const total=hero.offsetHeight-window.innerHeight;
+    let prog=Math.min(Math.max(-rect.top/total,0),1);
+    flower.style.setProperty('--bloom',prog);
+    flowerEls.forEach(el=>el.style.setProperty('--bloom',prog));
+  }
+  window.addEventListener('scroll',updateBloom,{passive:true});
+  window.addEventListener('resize',updateBloom);
+  updateBloom();
+
+  /* ---------- Catálogo ---------- */
+  const products=[
+    {id:1,name:'Primavera Vibrante',price:24990,img:'Captura de pantalla 2026-06-18 162557.png'},
+    {id:2,name:'Sol de Girasoles',price:22990,img:'Captura de pantalla 2026-06-18 162646.png'},
+    {id:3,name:'Pasión en Rojo',price:27990,img:'Captura de pantalla 2026-06-18 162656.png'},
+    {id:4,name:'Jardín Pastel',price:23990,img:'Captura de pantalla 2026-06-18 162712.png'},
+    {id:5,name:'Atardecer de Lilium',price:25990,img:'Captura de pantalla 2026-06-18 162720.png'},
+  ];
+  const fmt=n=>'$'+n.toLocaleString('es-CL');
+  const grid=document.getElementById('grid');
+  products.forEach(p=>{
+    const el=document.createElement('div');
+    el.className='card';
+    el.innerHTML=`
+      <div class="ph"><img src="${encodeURI(p.img)}" alt="${p.name}"></div>
+      <div class="body">
+        <h3>${p.name}</h3>
+        <div class="price">${fmt(p.price)}</div>
+        <button class="add" onclick="addProduct(${p.id})">Agregar al carrito</button>
+      </div>`;
+    grid.appendChild(el);
+  });
+
+  /* ---------- Carrito (líneas: catálogo + personalizados) ---------- */
+  let cart=[]; // {key,name,price,img,desc,qty}
+  const $=id=>document.getElementById(id);
+
+  function addProduct(id){
+    const p=products.find(x=>x.id===id);
+    const key='p'+id;
+    const line=cart.find(l=>l.key===key);
+    if(line) line.qty++;
+    else cart.push({key,name:p.name,price:p.price,img:p.img,desc:'',qty:1});
+    render();openCart();
+  }
+  function changeQty(key,d){
+    const line=cart.find(l=>l.key===key);
+    if(!line)return;
+    line.qty+=d;
+    if(line.qty<=0) cart=cart.filter(l=>l.key!==key);
+    render();
+  }
+  function render(){
+    let totalItems=0,totalPrice=0;
+    const itemsEl=$('items');
+    if(cart.length===0){
+      itemsEl.innerHTML='<p class="empty">Tu carrito está vacío 🌸</p>';
+    }else{
+      itemsEl.innerHTML='';
+      cart.forEach(l=>{
+        totalItems+=l.qty;totalPrice+=l.qty*l.price;
+        const row=document.createElement('div');
+        row.className='ci';
+        row.innerHTML=`
+          ${l.img?`<img src="${encodeURI(l.img)}" alt="${l.name}">`:'<img src="ChatGPT%20Image%2018%20jun%202026,%2016_30_35.png" alt="ramo">'}
+          <div class="ci-info">
+            <h4>${l.name}</h4>
+            ${l.desc?`<div class="desc">${l.desc}</div>`:''}
+            <div class="p">${fmt(l.price)}</div>
+          </div>
+          <div class="qty">
+            <button onclick="changeQty('${l.key}',-1)">−</button>
+            <span>${l.qty}</span>
+            <button onclick="changeQty('${l.key}',1)">+</button>
+          </div>`;
+        itemsEl.appendChild(row);
+      });
+    }
+    $('count').textContent=totalItems;
+    $('total').textContent=fmt(totalPrice);
+    $('checkout').classList.toggle('disabled',totalItems===0);
+  }
+  function openCart(){$('drawer').classList.add('open');$('overlay').classList.add('open');}
+  function closeCart(){$('drawer').classList.remove('open');$('overlay').classList.remove('open');}
+  function checkout(){
+    if(cart.length===0)return;
+    let msg='¡Hola Florería Carola Salinas Rojas! 🌸 Quiero hacer este pedido:\n\n';
+    let total=0;
+    cart.forEach(l=>{
+      total+=l.qty*l.price;
+      msg+=`• ${l.qty} x ${l.name} — ${fmt(l.price*l.qty)}\n`;
+      if(l.desc) msg+=`   (${l.desc})\n`;
+    });
+    msg+=`\n*Total: ${fmt(total)}*`;
+    window.open('https://wa.me/56954054379?text='+encodeURIComponent(msg),'_blank');
+  }
+
+  /* ---------- Constructor "Arma tu ramo" ---------- */
+  function getSize(){
+    const [name,price]=document.querySelector('input[name="size"]:checked').value.split('|');
+    return {name,price:+price};
+  }
+  function getFlowers(){
+    return [...document.querySelectorAll('#flowers input:checked')].map(c=>c.value);
+  }
+  function getPalette(){return document.querySelector('input[name="palette"]:checked').value;}
+  function updateBuilder(){
+    const s=getSize();const f=getFlowers();
+    $('sumSize').textContent=s.name;
+    $('sumFlowers').textContent=f.length?f.join(', '):'A elección';
+    $('sumPalette').textContent=getPalette();
+    $('sumPrice').textContent=fmt(s.price);
+  }
+  function addCustom(){
+    const s=getSize();const f=getFlowers();const pal=getPalette();
+    const note=$('note').value.trim();
+    let desc=`Flores: ${f.length?f.join(', '):'a elección'} · Colores: ${pal}`;
+    if(note) desc+=` · Nota: ${note}`;
+    cart.push({key:'c'+Date.now(),name:`Ramo personalizado (${s.name})`,price:s.price,img:'',desc,qty:1});
+    render();openCart();
+  }
+</script>
+</body>
+</html>
